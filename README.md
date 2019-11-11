@@ -19,7 +19,7 @@ However, until now, positioning CSS generated content in 3D was not possible.
 
 ## Proposal
 
-Our goal is to break off parts of web page into the 3D space around the browser surface. 
+Our goal is to break off parts of web page into the 3D space around the browser surface.
 
 This would make viewing web pages a much more immersive experience rather than looking at a rectangular surface.
 We hope to accomplish this by introducing a small addition to CSS.
@@ -29,16 +29,6 @@ We propose to introduce a new value for `transform-style`: `detached`.
 This new property builds upon the existing 3D transforms that are shipping in all browsers and extends the behavior of `transform-style: preserve-3d`.
 The main difference is that instead of flattening the transformed elements back to the page, the transformed element stays in 3D space.
 If `transform-style: detached` is specified on an element, children with 3D transforms will be lifted out of the page.
-
-Here is an example rendering of the effect:
-![scene](https://github.com/rcabanier/detached_explainer/raw/master/detached.gif "Scene")
-
-As the page or a parent element scrolls, the detached element should scroll.
-CSS animations and transitions will apply as well.
-
-Because we don't want to render content anywhere in the user's space, we also propose to define a "safe space" around the browser.
-Content can not be placed outside this space.
-![prism](https://github.com/rcabanier/detached_explainer/raw/master/prism.gif "Prism")
 
 Example:
 
@@ -60,6 +50,15 @@ Example:
         </div>
     </body>
 
+Here is an example rendering of the effect:
+![scene](https://github.com/rcabanier/detached_explainer/raw/master/detached.gif "Scene")
+
+As the page or a parent element scrolls, the detached element should scroll.
+CSS animations and transitions will apply as well.
+
+In order to disallow unrestricted access of user's space to the content developer, we also propose to define a "safe space" that shall be requested to the user by content developer and user consented.
+Content can not be placed outside this space.
+![prism](https://github.com/rcabanier/detached_explainer/raw/master/prism.gif "Prism")
 
 [//]: # (## Goals [or Motivating Use Cases, or Scenarios])
 [//]: # ([What is the end-user need which this project aims to address?])
@@ -103,7 +102,7 @@ We propose that descendents with `detached` are treated as `preserve-3d`.
 [//]: # (TODO: We need to explain this, but I cant think of the best explanation)
 
 #
-## Considered alternatives / other details
+## Considered alternate proposals
 [//]: # ([This should include as many alternatives as you can, from high level architectural decisions down to alternative naming choices.])
 
 ### 1. Applying the detached style directly to the surface to be detached.
@@ -154,11 +153,10 @@ Any node with transform-style: `flat` specified either explicitly or due to a gr
 [//]: # ([Implementor C] : Negative)
 [//]: # ([If appropriate, explain the reasons given by other implementors for their concerns.])
 
-[//]: # (## References & acknowledgements)
+## References & acknowledgements
 [//]: # ([Your design will change and be informed by many people; acknowledge them in an ongoing way! It helps build community and, as we only get by through the contributions of many, is only fair.])
 [//]: # ([Unless you have a specific reason not to, these should be in alphabetical order.])
 
 [//]: # (Many thanks for valuable feedback and advice from:)
-[//]: # ([Person 1])
-[//]: # ([Person 2])
-[//]: # ([etc.])
+
+Josh Carpenter : Illustrations from [slide deck](https://docs.google.com/presentation/d/1ORdKs1wNe7QysRYSBtmW8LnMTFRu69gEwyOSrjIaZyA)
